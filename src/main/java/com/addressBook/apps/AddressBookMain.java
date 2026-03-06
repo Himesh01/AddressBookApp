@@ -72,5 +72,6 @@ public class AddressBookMain {
     	for(Contact c: contacts) {
     		System.out.println(c);
     	}
+    	
 	}
 }

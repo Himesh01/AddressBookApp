@@ -6,6 +6,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class AddressBookAppApplicationTests {
 	@Test
 	void contextLoads() {
-		
 	}
 }
