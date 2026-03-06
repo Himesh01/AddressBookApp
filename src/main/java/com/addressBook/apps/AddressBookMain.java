@@ -7,6 +7,7 @@ import java.util.List;
 import com.addressBook.apps.model.Contact;
 
 public class AddressBookMain {
+	//Helps to add Multiple persons in the address Book app
     private static List<Contact> contacts = new ArrayList<>();
     
     //Add Contact
@@ -69,6 +70,7 @@ public class AddressBookMain {
     	
     	System.out.println("\n");
     	delete("nageshwar patel");
+    	System.out.println("\n");
     	for(Contact c: contacts) {
     		System.out.println(c);
     	}
