@@ -1,13 +1,13 @@
-package com.example.demo;
+package com.addressBook.apps;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AdressBookAppApplication {
+public class AddressBookAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AdressBookAppApplication.class, args);
+		SpringApplication.run(AddressBookAppApplication.class, args);
 	}
 
 }
