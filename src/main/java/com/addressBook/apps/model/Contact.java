@@ -9,8 +9,8 @@ public class Contact {
     private int zip;
     private String phoneNo;
     private String email;
-	 public Contact(String firstName, String lastName, String address, String city, String state, int zip,
-			String phoneNo, String email) {
+    public Contact(String firstName, String lastName, String address, String city, String state, int zip,
+    		String phoneNo, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -21,6 +21,7 @@ public class Contact {
 		this.phoneNo = phoneNo;
 		this.email = email;
 	 }
+    
 	 public String getFirstName() {
 		 return firstName;
 	 }
@@ -74,5 +75,4 @@ public class Contact {
 		return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
 				+ ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + ", email=" + email + "]";
 	 }
-	 
 }
