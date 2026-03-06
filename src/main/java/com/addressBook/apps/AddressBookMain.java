@@ -1,79 +1,113 @@
 package com.addressBook.apps;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.addressBook.apps.model.Contact;
 
 public class AddressBookMain {
-	//Helps to add Multiple persons in the address Book app
-    private static List<Contact> contacts = new ArrayList<>();
-    
-    //Add Contact
-    public static void add(String s) {
-    	String[] arr = s.split(":");
-    	if(arr.length!=8) {
-    		throw new IllegalArgumentException("Invalid Input");
-    	}
-    	contacts.add(new Contact(arr[0],arr[1],arr[2],arr[3],arr[4],Integer.parseInt(arr[5]), arr[6], arr[7]));
-    }
-    
-    //Update Contact
-    public static void update(String name ,String s){
-    	String arr[] = s.split(":");
-    	if(arr.length != 8) {
-    		throw new IllegalArgumentException("Invalid Input");
-    	}
-    	for(Contact c : contacts) {
-    		if(name.equalsIgnoreCase(c.getFirstName()+" "+c.getLastName())) {
-				c.setFirstName(arr[0]);
-				c.setLastName(arr[1]);
-				c.setAddress(arr[2]);
-				c.setCity(arr[3]);
-				c.setState(arr[4]);
-				c.setZip(Integer.parseInt(arr[5]));
-				c.setPhoneNo(arr[6]);
-				c.setEmail(arr[7]);
-				return;
+	private static Map<String, AddressBook> addressBookSystem = new HashMap<>();
+	private static Scanner sc = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		System.out.println("Welcome to Address Book System");
+		
+		while(true) {
+			System.out.println("\n1. Add New Address Book");
+			System.out.println("2. Access Existing Addess Book");
+			System.out.println("3. Exit");
+			int choice = sc.nextInt();
+			sc.nextLine();
+			
+			switch(choice) {
+			case 1:
+				System.out.print("Enter unique name for new Address Book: ");
+				String name = sc.nextLine();
+				if(addressBookSystem.containsKey(name)) {
+					System.out.println("Address Book with this name already exits");
+				}
+				else {
+					addressBookSystem.put(name, new AddressBook());
+					System.out.println("Address Book "+name+" "+" created.");
+				}
+				break;
+			case 2:
+				System.out.println("Enter Address Book name to access: ");
+				String bookName = sc.nextLine();
+				AddressBook currentBook = addressBookSystem.get(bookName);
+				if(currentBook!=null) {
+					System.out.println("Accessing "+bookName);
+					manageAddressBook(currentBook, bookName);
+				}	
+				else {
+					System.out.println("Address Book not found");
+				}
+				break;
+			case 3:
+				System.exit(0);
 			}
 		}
-		System.out.println("User not found");		
 	}
-    
-    //Delete Contact
-    public static void delete(String name) {
-    	for(Contact c: contacts) {
-    		if(name.equalsIgnoreCase(c.getFirstName()+" "+c.getLastName())) {
-    			System.out.println("Deleted contact : "+c.toString());
-    			contacts.remove(c);
-    			return;
-    		}
-    	}
-    	System.out.println("User Not Found");
-    }
-    
-    //Main
-    public static void main(String[] args ) throws IOException{
-    	add("lucky:pal:berkhera:bhopal:MP:12345:83056144536:pallucky936@gmail.com");
-    	add("Himesh:kurmi:baisa:sagar:MP:462022:89564122121:himeshkurmi@gmail.com");
-    	add("nageshwar:patel:maiyar:katni:MP:11111:7845129654:nageshwar@gmail.com");
-    	for(Contact c : contacts) {
-    		System.out.println(c.toString());
-    	}
-    	
-    	update("himesh kurmi","Himesh:kurmi:Anand Nager:Bhopal:MP:462022:89564122121:himeshkurmi@gmail.com ");
-    	System.out.println("\n");
-    	for(Contact c: contacts) {
-    		System.out.println(c);
-    	}
-    	
-    	System.out.println("\n");
-    	delete("nageshwar patel");
-    	System.out.println("\n");
-    	for(Contact c: contacts) {
-    		System.out.println(c);
-    	}
-    	
+	public static void manageAddressBook(AddressBook book, String bookName) {
+		while(true) {
+			System.out.println("\n--- Managing Address Book: "+bookName+" ---");
+			System.out.println("1.Add Contact\n2. Edit Contact\n3. Delete Contact\n4. View All\n5. Back");
+			int choice = sc.nextInt();
+			sc.nextLine();
+			
+			if(choice==5) 
+				break;
+			
+			switch(choice) {
+			case 1:
+				book.addContact(getContactFromConsole());
+				break;
+			case 2:
+				System.out.println("Enter full name to edit: ");
+				String name = sc.nextLine();
+				
+				System.out.println("Enter updated details separated by ':'");
+				System.out.println("Format: firstName:lastName:address:city:state:zip:phone:email");
+				String data = sc.nextLine();
+				book.update(name, data);
+				break;
+			case 3:
+				System.out.print("Enter full name to delete: ");
+                book.deleteContact(sc.nextLine()); 
+                break;
+            case 4:
+                book.displayContact();
+                break;
+			}
+		}
+	}
+	public static Contact getContactFromConsole() {
+		System.out.print("First Name: ");
+		String fn = sc.nextLine();
+		
+        System.out.print("Last Name: ");
+        String ln = sc.nextLine();
+        
+        System.out.print("Address: ");
+        String addr = sc.nextLine();
+        
+        System.out.print("City: ");
+        String city = sc.nextLine();
+        
+        System.out.print("State: ");
+        String state = sc.nextLine();
+        
+        System.out.print("Zip: ");
+        int zip = sc.nextInt();
+        
+        System.out.print("Phone: ");
+        String ph = sc.nextLine();
+        
+        System.out.print("Email: ");
+        String em = sc.nextLine();
+        
+        return new Contact(fn, ln, addr, city, state, zip, ph, em);
 	}
 }
