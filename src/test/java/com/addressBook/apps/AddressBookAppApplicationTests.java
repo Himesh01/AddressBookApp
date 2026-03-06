@@ -4,7 +4,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class AddressBookAppApplicationTests {
-
 	@Test
 	void contextLoads() {
 	}
