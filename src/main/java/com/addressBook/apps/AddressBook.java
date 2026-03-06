@@ -10,8 +10,17 @@ public class AddressBook {
 	//Helps to add multiple person in the Address book App
 	
 	public void addContact(Contact c) {
+		boolean exists = contacts.stream().anyMatch(contact	-> contact.getFirstName().equalsIgnoreCase(c.getFirstName())
+				&& contact.getLastName().equalsIgnoreCase(c.getLastName()));
+		
+		if(exists) {
+			System.out.println("Duplicate Contact! Person already exists.");
+			return;
+		}
 		contacts.add(c);
+		System.out.println("Contact added successfully");
 	}
+	
 	public void displayContact() {
 		for(Contact c: contacts) {
 			System.out.println(c);
