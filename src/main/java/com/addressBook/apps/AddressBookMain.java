@@ -80,6 +80,25 @@ public class AddressBookMain {
             case 4:
                 book.displayContact();
                 break;
+            case 5:
+            	System.out.println("Enter city: ");
+            	String city = sc.nextLine();
+            	
+            	List<Contact> cityResult = book.searchContactByCity(city);
+            	if(cityResult.isEmpty()) System.out.println("No contact found in this city");
+            	else
+            		cityResult.forEach(System.out::println);
+            	break;
+            case 6:
+            	System.out.println("Enter state");
+            	String state = sc.nextLine();
+            	
+            	List<Contact> stateResult = book.searchContactByState(state);
+            	if(stateResult.isEmpty())
+            		System.out.println("No contact found in this state");
+            	else
+            		stateResult.forEach(System.out::println);
+            	break;
 			}
 		}
 	}

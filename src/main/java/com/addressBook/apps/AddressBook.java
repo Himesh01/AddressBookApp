@@ -47,7 +47,7 @@ public class AddressBook {
 		System.out.println("User not found");		
 	}
 	
-	public  void deleteContact(String name) {
+	public void deleteContact(String name) {
 		for(Contact c: contacts) {
 			if(name.equalsIgnoreCase(c.getFirstName()+" "+c.getLastName())) {
 				System.out.println("Deleted contact: "+c.toString());
@@ -56,6 +56,14 @@ public class AddressBook {
 			}
 		}
 		System.out.println("User not found");
+	}
+	
+	public List<Contact> searchContactByCity(String city){
+		List<Contact> ans = contacts.stream().filter(c->c.getCity().equalsIgnoreCase(city)).toList();
+		return ans;
+	}
+	public List<Contact> searchContactByState(String state){
+		return contacts.stream().filter(c->c.getState().equalsIgnoreCase(state)).toList();
 	}
 		
 }

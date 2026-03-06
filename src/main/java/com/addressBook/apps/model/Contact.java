@@ -93,5 +93,4 @@ public class Contact {
 		public int hashCode() {
 			return Objects.hash(firstName.toLowerCase(), lastName.toLowerCase());
 		}
-		
 	}
