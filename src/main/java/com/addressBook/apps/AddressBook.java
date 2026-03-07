@@ -1,5 +1,10 @@
 package com.addressBook.apps;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -42,7 +47,7 @@ public class AddressBook {
 				c.setAddress(arr[2]);
 				c.setCity(arr[3]);
 				c.setState(arr[4]);
-				c.setZip(Integer.parseInt(arr[5]));
+				c.setZip((arr[5]));
 				c.setPhoneNo(arr[6]);
 				c.setEmail(arr[7]);
 				return;
@@ -92,5 +97,38 @@ public class AddressBook {
 	}
 	public List<Contact> getContactSortedByZip(){
 		return contacts.stream().sorted(Comparator.comparing(Contact::getZip)).toList();
+	}
+	
+	public void writeContactToFile(String filePath) {
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
+			for(Contact c: contacts) {
+				String data = c.getFirstName()+":"+c.getLastName()+":"+c.getAddress()
+				+":"+c.getCity()+":"+c.getState()+":"+c.getZip()+":"+c.getPhoneNo()+":"+c.getEmail();
+				
+				bw.write(data);
+				bw.newLine();
+			}
+			System.out.println("Contacts saved to file");
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void readContactFile(String filePath) {
+		try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+			String line;
+			while((line = br.readLine())!=null) {
+				String[] arr = line.split(":");
+				if(arr.length!=8)
+					continue;
+				Contact c= new Contact(arr[0], arr[1], arr[2], arr[3], arr[4],
+						arr[5], arr[6], arr[7]);
+				contacts.add(c);
+			}
+			System.out.println("Contacts loaded from file");
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
