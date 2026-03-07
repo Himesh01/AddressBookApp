@@ -1,6 +1,5 @@
 package com.addressBook.apps;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,6 +22,10 @@ public class AddressBook {
 	}
 	
 	public void displayContact() {
+		if(contacts.isEmpty()) {
+			System.out.println("No contacts available");
+			return;
+		}
 		for(Contact c: contacts) {
 			System.out.println(c);
 		}
@@ -71,5 +74,11 @@ public class AddressBook {
 	}
 	public Map<String, List<Contact>> viewContactByState(){
 		return contacts.stream().collect(Collectors.groupingBy(c->c.getState(), Collectors.toList()));
+	}
+	public Map<String, Long> getContactsByCity(){
+		return contacts.stream().collect(Collectors.groupingBy(c->c.getCity(), Collectors.counting()));
+	}
+	public Map<String, Long> getContactsByState(){
+		return contacts.stream().collect(Collectors.groupingBy(c->c.getState(), Collectors.counting()));
 	}
 }
