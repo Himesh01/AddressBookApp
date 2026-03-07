@@ -84,4 +84,13 @@ public class AddressBook {
 	public List<Contact> getContactSortedByName(){
 		return contacts.stream().sorted(Comparator.comparing(Contact::getFirstName).thenComparing (Contact::getLastName)).toList();
 	}
+	public List<Contact> getContactSortedByCity(){
+		return contacts.stream().sorted(Comparator.comparing(Contact::getCity)).toList();
+	}
+	public List<Contact> getContactSortedByState(){
+		return contacts.stream().sorted(Comparator.comparing(Contact::getState)).toList();
+	}
+	public List<Contact> getContactSortedByZip(){
+		return contacts.stream().sorted(Comparator.comparing(Contact::getZip)).toList();
+	}
 }
