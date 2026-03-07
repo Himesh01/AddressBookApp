@@ -74,19 +74,20 @@ public class Contact {
 	 }
 	 @Override
 	 public String toString() {
-		return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
+		 return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
 				+ ", state=" + state + ", zip=" + zip + ", phoneNo=" + phoneNo + ", email=" + email + "]";
 	 }
 	 
 	 @Override
-		public boolean equals(Object obj) {
-			if(this == obj) return true;
-			if(obj==null || getClass()!=obj.getClass()) return false;
+	 
+	 public boolean equals(Object obj) {
+		 if(this == obj) return true;
+		 if(obj==null || getClass()!=obj.getClass()) return false;
 			
-			Contact c = (Contact) obj;
-			
-			return firstName.equalsIgnoreCase(c.getFirstName())
-					&& lastName.equalsIgnoreCase(c.getLastName());
+		 Contact c = (Contact) obj;
+		 
+		 return firstName.equalsIgnoreCase(c.getFirstName())
+				 && lastName.equalsIgnoreCase(c.getLastName());
 		}
 		
 		@Override
