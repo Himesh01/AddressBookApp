@@ -8,10 +8,10 @@ public class Contact {
     private String address;
     private String city;
     private String state;
-    private int zip;
+    private String zip;
     private String phoneNo;
     private String email;
-    public Contact(String firstName, String lastName, String address, String city, String state, int zip,
+    public Contact(String firstName, String lastName, String address, String city, String state, String arr,
     		String phoneNo, String email) {
 		super();
 		this.firstName = firstName;
@@ -19,7 +19,7 @@ public class Contact {
 		this.address = address;
 		this.city = city;
 		this.state = state;
-		this.zip = zip;
+		this.zip = arr;
 		this.phoneNo = phoneNo;
 		this.email = email;
 	 }
@@ -54,11 +54,11 @@ public class Contact {
 	 public void setState(String state) {
 		 this.state = state;
 	 }
-	 public int getZip() {
+	 public String getZip() {
 		 return zip;
 	 }
-	 public void setZip(int zip) {
-		 this.zip = zip;
+	 public void setZip(String i) {
+		 this.zip = i;
 	 }
 	 public String getPhoneNo() {
 		 return phoneNo;
