@@ -54,7 +54,7 @@ public class AddressBookMain {
 			int choice = sc.nextInt();
 			sc.nextLine();
 			
-			if(choice==9) 
+			if(choice==11) 
 				break;
 			
 			switch(choice) {
@@ -108,6 +108,14 @@ public class AddressBookMain {
             		System.out.println("\nState: "+s);
             		persons.forEach(System.out::println);
             	});
+            	break;
+            case 9:
+            	Map<String, Long> cityCount = book.getContactsByCity();
+            	cityCount.forEach((c,cnt) -> System.out.println(c+" : "+cnt+" persons"));
+            	break;
+            case 10:
+            	Map<String, Long> stateCount = book.getContactsByState();
+            	stateCount.forEach((s, cnt)-> System.out.println(s+" : "+cnt+" persons"));
             	break;
 			}
 		}
