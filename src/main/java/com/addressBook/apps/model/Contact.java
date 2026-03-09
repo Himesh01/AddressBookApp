@@ -24,6 +24,10 @@ public class Contact {
 		this.email = email;
 	 }
     
+	 public Contact() {
+		// TODO Auto-generated constructor stub
+	}
+
 	 public String getFirstName() {
 		 return firstName;
 	 }
@@ -93,5 +97,4 @@ public class Contact {
 		public int hashCode() {
 			return Objects.hash(firstName.toLowerCase(), lastName.toLowerCase());
 		}
-		
 	}
