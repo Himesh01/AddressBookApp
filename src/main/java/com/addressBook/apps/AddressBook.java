@@ -17,8 +17,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
+import java.sql.SQLException;
 
 import com.addressBook.apps.model.Contact;
+import com.addressBook.database.ConnectDatabase;
+import com.addressBook.database.DatabaseOperation;
+
 
 public class AddressBook {
 	private List<Contact> contacts = new ArrayList<>();
@@ -124,6 +128,7 @@ public class AddressBook {
 			e.printStackTrace();
 		}
 	}
+	
 	public void readContactFile(String filePath) {
 		try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
 			String line;
@@ -141,6 +146,7 @@ public class AddressBook {
 			e.printStackTrace();
 		}
 	}
+	
 	public void writeContactsToCSVFile(String filePath) {
 		try(CSVWriter writer = new CSVWriter(new FileWriter(filePath))){
 			String[] header = {"FirstName", "LastName", "Address", "City",
@@ -164,6 +170,7 @@ public class AddressBook {
 			e.printStackTrace();
 		}
 	}
+	
 	public void readContactsToCSVFile(String filePath) {
 		contacts.clear();
 		try(CSVReader reader = new CSVReader(new FileReader(filePath))){
@@ -184,6 +191,7 @@ public class AddressBook {
 			e.printStackTrace();
 		}
 	}
+	
 	public void writeContactsToJSONFile(String filePath) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
@@ -194,6 +202,7 @@ public class AddressBook {
 			e.printStackTrace();
 		}
 	}
+	
 	public void readContactsFromJSONFile(String filePath) {
 		contacts.clear();
 		Gson gson = new Gson();
@@ -207,6 +216,28 @@ public class AddressBook {
 			System.out.println("Contacts loaded from JSON");
 		}
 		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void writeContactsToDatabase(String addresBookName) {
+		for(Contact c: contacts) {
+			DatabaseOperation.add(c, addresBookName);
+		}
+		System.out.println("Contacts successfully added to database");
+	}
+	public void readFromDatabase(String addressBookName) {
+		try {
+			contacts.clear();
+			contacts.addAll(DatabaseOperation.getAll(addressBookName));
+			
+			System.out.println("Contacs loaded from database");
+			
+			for(Contact c: contacts) {
+				System.out.println(c);
+			}
+		}
+		catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
