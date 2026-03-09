@@ -47,6 +47,7 @@ public class AddressBookMain {
 			}
 		}
 	}
+	
 	public static void manageAddressBook(AddressBook book, String bookName) {
 		while(true) {
 			System.out.println("\n--- Managing Address Book: "+bookName+" ---");
