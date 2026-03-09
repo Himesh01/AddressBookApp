@@ -20,8 +20,7 @@ import java.lang.reflect.Type;
 import java.sql.SQLException;
 
 import com.addressBook.apps.model.Contact;
-import com.addressBook.database.ConnectDatabase;
-import com.addressBook.database.DatabaseOperation;
+import com.addressBook.database.*;
 
 
 public class AddressBook {
@@ -241,4 +240,27 @@ public class AddressBook {
 			e.printStackTrace();
 		}
 	}
-}
+	
+	public void syncWithDatabase(String fname, String lname, String addressBook) {
+
+	    Contact dbContact =
+	    DatabaseOperation.getPerson(fname, lname, addressBook);
+	    if(dbContact ==null) {
+	    	System.out.println("Contact not found in database");
+	    	return;
+	    }
+
+	    for(Contact c : contacts){
+
+	        if(c.getFirstName().equalsIgnoreCase(fname) &&
+	           c.getLastName().equalsIgnoreCase(lname)){
+
+	            if(c.equals(dbContact))
+	                System.out.println("Memory and Database are in Sync");
+	            else
+	                System.out.println("Memory and Database are NOT in Sync");
+	        }
+	    }
+	}
+}	
+			
