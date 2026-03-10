@@ -1,6 +1,8 @@
 package com.addressBook.apps.model;
 
 import java.util.Objects;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class Contact {
 	private String firstName;
@@ -11,6 +13,8 @@ public class Contact {
     private String zip;
     private String phoneNo;
     private String email;
+    private LocalDate dateAdded;
+    
     public Contact(String firstName, String lastName, String address, String city, String state, String arr,
     		String phoneNo, String email) {
 		super();
@@ -22,6 +26,8 @@ public class Contact {
 		this.zip = arr;
 		this.phoneNo = phoneNo;
 		this.email = email;
+		this.dateAdded =LocalDate.now();
+
 	 }
     
 	 public Contact() {
@@ -76,6 +82,12 @@ public class Contact {
 	 public void setEmail(String email) {
 		 this.email = email;
 	 }
+	 public LocalDate getDateAdded() {
+		 return dateAdded;
+	 }
+	 public void setDate(Date date) {
+		 this.dateAdded = LocalDate.parse(date.toString());
+	 }
 	 @Override
 	 public String toString() {
 		 return "Contacts [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
@@ -89,8 +101,14 @@ public class Contact {
 			
 		 Contact c = (Contact) obj;
 		 
-		 return firstName.equalsIgnoreCase(c.getFirstName())
-				 && lastName.equalsIgnoreCase(c.getLastName());
+		 return firstName.equalsIgnoreCase(c.firstName)
+		            && lastName.equalsIgnoreCase(c.lastName)
+		            && Objects.equals(address, c.address)
+		            && Objects.equals(city, c.city)
+		            && Objects.equals(state, c.state)
+		            && Objects.equals(zip, c.zip)
+		            && Objects.equals(phoneNo, c.phoneNo)
+		            && Objects.equals(email, c.email);
 		}
 		
 		@Override
