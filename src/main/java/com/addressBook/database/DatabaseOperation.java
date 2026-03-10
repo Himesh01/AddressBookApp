@@ -2,6 +2,7 @@ package com.addressBook.database;
 
 import java.sql.*;
 import java.util.*;
+import java.sql.Date;
 
 import com.addressBook.apps.model.Contact;
 
@@ -26,6 +27,7 @@ public class DatabaseOperation {
 			pstm.setString(7, contact.getPhoneNo());
 			pstm.setString(8, contact.getEmail());
 			pstm.setString(9, addressBookName);
+			pstm.setDate(10, Date.valueOf(contact.getDateAdded()));
 			
 			int s = pstm.executeUpdate();
 			System.out.println(s+" rows updates sucessfully!");
@@ -58,7 +60,7 @@ public class DatabaseOperation {
 			c.setZip(rs.getString("zip"));
 			c.setPhoneNo(rs.getString("phoneNo"));
 			c.setEmail(rs.getString("email"));
-			
+			c.setDate(rs.getDate("dateAdded"));
 			ans.add(c);
 		}
 		return ans;
