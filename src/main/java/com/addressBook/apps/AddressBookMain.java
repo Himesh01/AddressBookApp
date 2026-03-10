@@ -1,4 +1,4 @@
-package com.addressBook.apps;
+																								package com.addressBook.apps;
 
 import java.util.*;
 
@@ -182,7 +182,7 @@ public class AddressBookMain {
         System.out.print("City: ");
         String city = sc.nextLine();
         
-        System.out.print("State: ");
+        System.out.print("State:						 ");
         String state = sc.nextLine();
         
         System.out.print("Zip: ");
